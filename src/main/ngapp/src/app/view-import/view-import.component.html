@@ -1,0 +1,21 @@
+<div class="main-div">
+  <mat-card class="center">
+    <mat-card-title>Import Samples</mat-card-title>
+    <mat-card-content>
+      <div>
+        <form method="POST" enctype="multipart/form-data" action="/probes/import">
+          <div *ngIf="totalFiles == 0">
+            <div>
+              Select files to import
+              <input type="file" name="file" (change)="onSelectFiles($event)" multiple/>
+            </div>
+            <br>
+            <button mat-raised-button button color="primary" (click)="onStartImporting($event)">Start importing</button>
+          </div>
+          <h2 *ngIf="currentFile < totalFiles"> Import Progress: {{currentFile}} / {{totalFiles}}</h2>
+          <h2 *ngIf="totalFiles > 0 && currentFile == totalFiles"> All {{totalFiles}} files were imported. Elapsed time: {{elapsedTime}}</h2>
+        </form>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

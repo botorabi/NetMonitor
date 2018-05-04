@@ -1,0 +1,24 @@
+<mat-card  class="center">
+  <mat-card-title>Time Window</mat-card-title>
+  <mat-card-content>
+    <div>
+      <mat-form-field>
+        <input matInput [matDatepicker]="pickerBegin" placeholder="Begin" [(formControl)]="timeBegin">
+        <mat-datepicker-toggle matSuffix [for]="pickerBegin"></mat-datepicker-toggle>
+        <mat-datepicker #pickerBegin></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [matDatepicker]="pickerEnd" placeholder="End" [(formControl)]="timeEnd">
+        <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+        <mat-datepicker #pickerEnd></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <button mat-button color="primary" (click)="onUpdateChart(chartComponent)">Update Chart</button>
+  </mat-card-content>
+</mat-card>
+<br>
+<mat-card class="center">
+  <div style="height:400px;">
+    <app-chart #chartComponent></app-chart>
+  </div>
+</mat-card>
