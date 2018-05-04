@@ -12,6 +12,8 @@
 
 **NetMonitor** is a web application which allows the collection and viewing the power network frequency over time. The data is collected by a special hardware, for more details contact the project administrator. The collected data is then imported to the web application and can be viewed by a browser.
 
+The web application is implemented by Spring Boot and Angualr 5.
+
 
 # Screenshots
 
