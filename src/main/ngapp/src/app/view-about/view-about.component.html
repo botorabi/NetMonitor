@@ -1,10 +1,15 @@
 <div class="main-div">
   <mat-card class="center">
-    <mat-card-title>About NetMon</mat-card-title>
+    <mat-card-title>About {{appInfo.name}}</mat-card-title>
     <mat-card-content>
-      <div>Copyright 2018</div>
-      <br>
-      <div>Version {{version}}</div>
+      <div>
+        <img src="/favicon.ico" height="128" width="128">
+        <div>
+          <p>Copyright 2018</p>
+          <p>Version {{appInfo.version}}</p>
+          <a href="https://github.com/botorabi/NetMonitor">https://github.com/botorabi/NetMonitor</a>
+        </div>
+      </div>
     </mat-card-content>
   </mat-card>
 </div>

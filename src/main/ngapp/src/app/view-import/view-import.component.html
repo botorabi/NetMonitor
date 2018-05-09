@@ -10,11 +10,19 @@
               <input type="file" name="file" (change)="onSelectFiles($event)" multiple/>
             </div>
             <br>
-            <button mat-raised-button button color="primary" (click)="onStartImporting($event)">Start importing</button>
+            <button mat-raised-button button color="primary" (click)="onStartImporting()">Start importing</button>
           </div>
           <h2 *ngIf="currentFile < totalFiles"> Import Progress: {{currentFile}} / {{totalFiles}}</h2>
-          <h2 *ngIf="totalFiles > 0 && currentFile == totalFiles"> All {{totalFiles}} files were imported. Elapsed time: {{elapsedTime}}</h2>
+          <div *ngIf="totalFiles > 0 && currentFile == totalFiles">
+            <h2> All {{totalFiles}} files were imported. Elapsed time: {{elapsedTime}}</h2>
+            <br>
+            <button mat-raised-button button color="primary" (click)="onClearImport()">Import more samples</button>
+          </div>
         </form>
+        <div *ngIf="errorText">
+          <p style="color: red">{{errorText}}</p>
+          <button mat-raised-button button color="primary" (click)="onClearImport()">Retry</button>
+        </div>
       </div>
     </mat-card-content>
   </mat-card>
