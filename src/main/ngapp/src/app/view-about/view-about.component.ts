@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {AppComponent} from "../app.component";
+import {Component, OnInit} from '@angular/core';
+import {AppInformationService} from "../service/app-information.service";
 
 @Component({
   selector: 'app-view-about',
@@ -7,10 +7,9 @@ import {AppComponent} from "../app.component";
   styleUrls: ['./view-about.component.css']
 })
 export class ViewAboutComponent implements OnInit {
-  version: String = "";
 
-  constructor(app: AppComponent) {
-    this.version = app.version;
+  constructor(
+    public appInfo: AppInformationService) {
   }
 
   ngOnInit() {

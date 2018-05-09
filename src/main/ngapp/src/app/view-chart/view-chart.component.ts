@@ -9,8 +9,8 @@ import {ChartComponent} from "../chart/chart.component";
 })
 export class ViewChartComponent implements OnInit {
 
-  private timeBegin = new FormControl(new Date(Date.now() - (30*24*60*60*1000)));
-  private timeEnd = new FormControl(new Date());
+  timeBegin = new FormControl(new Date(Date.now() - (30*24*60*60*1000)));
+  timeEnd = new FormControl(new Date());
 
   constructor() {
   }

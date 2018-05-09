@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 
 
 import {AppComponent} from './app.component';
-import {ApiService} from './api.service';
+import {ApiService} from './service/api.service';
 import {HttpClientModule} from "@angular/common/http";
 import {ChartComponent} from './chart/chart.component';
 import {NgxChartsModule} from "@swimlane/ngx-charts";
@@ -15,6 +15,7 @@ import {appRoutes} from "./appRoutes";
 import {ViewAboutComponent} from "./view-about/view-about.component";
 import {FormsModule} from "@angular/forms";
 import {ViewImportComponent} from "./view-import/view-import.component";
+import {AppInformationService} from "./service/app-information.service";
 
 
 @NgModule({
@@ -34,7 +35,7 @@ import {ViewImportComponent} from "./view-import/view-import.component";
     MaterialModule,
     FormsModule
   ],
-  providers: [ApiService],
+  providers: [ApiService, AppInformationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ApiService} from "../api.service";
+import {ApiService} from "../service/api.service";
 
 @Component({
   selector: 'app-view-import',
@@ -9,11 +9,12 @@ import {ApiService} from "../api.service";
 export class ViewImportComponent implements OnInit {
 
   files: FileList;
-  totalFiles: number = 0;
-  currentFile: number = 0;
-  timeBeginMSec: number = 0;
-  timeEndMSec: number = 0;
-  elapsedTime: string = "00:00:00";
+  totalFiles: number;
+  currentFile: number;
+  timeBeginMSec: number;
+  timeEndMSec: number;
+  elapsedTime: string;
+  errorText: string;
 
   constructor(
     private apiService: ApiService
@@ -21,6 +22,7 @@ export class ViewImportComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.onClearImport();
   }
 
   public onSelectFiles(event) {
@@ -28,22 +30,39 @@ export class ViewImportComponent implements OnInit {
   }
 
   public onStartImporting() {
+    if (this.files == null) {
+      return;
+    }
+
     this.totalFiles = this.files.length;
     this.currentFile = 0;
     this.timeBeginMSec = Date.now();
 
     for (var i = 0; i < this.files.length; ++i) {
       //console.log("sending file: " + this.files[i].name);
-      this.apiService.importProbes(this.files[i]).subscribe(
-        response => {
+      this.apiService.importProbes(this.files[i]).subscribe({
+        next: response => {
           this.currentFile++;
           if (this.currentFile == this.totalFiles) {
             this.timeEndMSec = Date.now();
             this.elapsedTime = this.setupElapsedTime(this.timeBeginMSec, this.timeEndMSec);
           }
+        },
+        error: err => {
+          this.errorText = "An error occurred while importing data: " + JSON.stringify(err);
         }
-      );
+      });
     }
+  }
+
+  onClearImport() {
+    this.files = null;
+    this.totalFiles = 0;
+    this.currentFile = 0;
+    this.timeBeginMSec = 0;
+    this.timeEndMSec = 0;
+    this.elapsedTime = "00:00:00";
+    this.errorText = null;
   }
 
   private setupElapsedTime(timeBegin: number, timeEnd: number): string {

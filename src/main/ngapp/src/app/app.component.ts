@@ -1,7 +1,8 @@
 import {Component, NgModule} from '@angular/core';
-import {ApiService} from "./api.service";
+import {ApiService} from "./service/api.service";
 import {Probe} from "./probe";
 import {MatCard} from "@angular/material";
+import {AppInformationService} from "./service/app-information.service";
 
 @NgModule({
   imports: [MatCard]
@@ -14,11 +15,13 @@ import {MatCard} from "@angular/material";
   providers: [ApiService]
 })
 export class AppComponent {
-  version = '0.2.0';
   countProbes = 0;
   probes: Array<Probe>;
 
-  constructor(apiService: ApiService) {
+  constructor(
+    apiService: ApiService,
+    public appInfo: AppInformationService) {
+
     apiService.getProbes().subscribe({
       next: (p) => {
         this.probes = p;

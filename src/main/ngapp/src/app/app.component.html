@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <a mat-button routerLink="" routerLinkActive="active"><img src="/favicon.ico" height="28" width="28"><span> NetMon</span></a>
+    <a mat-button routerLink="" routerLinkActive="active"><img src="/favicon.ico" height="28" width="28"><span> {{appInfo.name}}</span></a>
     <span style="flex: 1 1 auto;"></span>
     <a mat-button routerLink="about" routerLinkActive="active"><span>About</span></a>
     <a mat-button routerLink="import" routerLinkActive="active"><span>Import Data</span></a>
@@ -15,7 +15,7 @@
 
 <footer>
   <mat-toolbar color="primary">
-      <a mat-button>NetMon v{{version}}, Copyright 2018</a>
+      <a mat-button>NetMonitor v{{appInfo.version}}, Copyright 2018</a>
   </mat-toolbar>
 </footer>
 

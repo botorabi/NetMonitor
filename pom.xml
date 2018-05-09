@@ -5,10 +5,10 @@
 
 	<groupId>net.vrfun</groupId>
 	<artifactId>netmon</artifactId>
-	<version>0.2.0-SNAPSHOT</version>
+	<version>0.2.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>NetMon</name>
+	<name>NetMonitor</name>
 	<description>Power Network Monitor</description>
 
 	<parent>
