@@ -1,36 +1,34 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {Observable} from "rxjs/Observable";
 import {Probe} from "../probe";
 import {HttpClient} from "@angular/common/http";
+import {DOCUMENT} from "@angular/common";
 
 
 @Injectable()
 export class ApiService {
 
-  constructor(private http: HttpClient) {
+  readonly location;
+  readonly port = 8080;
+
+  constructor(private http: HttpClient,
+              @Inject(DOCUMENT) private document) {
+    this.location = document.location.protocol + '//' + this.document.location.hostname + ':' + this.port;
   }
 
   public getProbes(): Observable<Array<Probe>> {
-    return this.http.get<Array<Probe>>("/probes");
+    return this.http.get<Array<Probe>>(this.location + '/probes');
   }
 
   public getProbesByTime(beginTime: Date, endTime: Date): Observable<Array<Probe>> {
     let from = Math.floor(beginTime.getTime() / 1000);
     let to = Math.floor(endTime.getTime() / 1000);
-    return this.http.get<Array<Probe>>("/probes/" + from + "/" + to);
+    return this.http.get<Array<Probe>>(this.location  + '/probes/' + from + '/' + to);
   }
 
-  public importProbes(file: File): Observable<Object>{
-
-    //console.log("file size: " + file.size + ", content: " + file.toString());
-
+  public importProbes(file: File): Observable<Object> {
     const formData: FormData = new FormData();
     formData.append('file', file, file.name);
-
-    let observable = this.http.post("/probes/import", formData);
-    observable.subscribe(
-      r => { /*console.log('got r', r); */}
-    );
-    return observable;
+    return this.http.post(this.location + '/probes/import', formData);
   }
 }

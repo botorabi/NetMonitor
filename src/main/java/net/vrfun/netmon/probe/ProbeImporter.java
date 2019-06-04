@@ -25,6 +25,7 @@ public class ProbeImporter {
     private long totalImports;
 
     private final int COUNT_COLUMNS = 10;
+    private final int PROBE_CACHE_FLUSH_THRESHOLD = 1000;
 
     private List<ProbeEntity> probeCache = new ArrayList<>();
     private final Calendar calender;
@@ -119,10 +120,10 @@ public class ProbeImporter {
             return;
         }
 
-        float frequency = (float)(averageFrequency / (double)countSamples);
+        float frequency = (float)(averageFrequency / (float)countSamples);
         countSamples = 0;
 
-        if (addProbeToCache(frequency, timeStamp) > 10000) {
+        if (addProbeToCache(frequency, timeStamp) > PROBE_CACHE_FLUSH_THRESHOLD) {
             flushProbeCache();
         }
     }
