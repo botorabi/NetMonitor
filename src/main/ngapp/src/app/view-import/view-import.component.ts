@@ -30,7 +30,7 @@ export class ViewImportComponent implements OnInit {
   }
 
   public onStartImporting() {
-    if (this.files == null) {
+    if ((this.files == null) ||(this.files.length == 0)) {
       return;
     }
 
@@ -38,21 +38,7 @@ export class ViewImportComponent implements OnInit {
     this.currentFile = 0;
     this.timeBeginMSec = Date.now();
 
-    for (var i = 0; i < this.files.length; ++i) {
-      //console.log("sending file: " + this.files[i].name);
-      this.apiService.importProbes(this.files[i]).subscribe({
-        next: response => {
-          this.currentFile++;
-          if (this.currentFile == this.totalFiles) {
-            this.timeEndMSec = Date.now();
-            this.elapsedTime = this.setupElapsedTime(this.timeBeginMSec, this.timeEndMSec);
-          }
-        },
-        error: err => {
-          this.errorText = "An error occurred while importing data: " + JSON.stringify(err);
-        }
-      });
-    }
+    this.importFile(this.files[this.currentFile]);
   }
 
   onClearImport() {
@@ -63,6 +49,26 @@ export class ViewImportComponent implements OnInit {
     this.timeEndMSec = 0;
     this.elapsedTime = "00:00:00";
     this.errorText = null;
+  }
+
+  private importFile(file: File) {
+    //console.log("importing file: " + file.name);
+    this.apiService.importProbes(file).subscribe({
+      next: response => {
+        this.currentFile++;
+        if (this.currentFile == this.totalFiles) {
+          this.timeEndMSec = Date.now();
+          this.elapsedTime = this.setupElapsedTime(this.timeBeginMSec, this.timeEndMSec);
+          //console.log('all ' + this.totalFiles + ' files were successfully imported');
+        }
+        else {
+          this.importFile(this.files[this.currentFile]);
+        }
+      },
+      error: err => {
+        this.errorText = "An error occurred while importing data: " + JSON.stringify(err);
+      }
+    });
   }
 
   private setupElapsedTime(timeBegin: number, timeEnd: number): string {
