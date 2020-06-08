@@ -4,7 +4,7 @@ import {Injectable} from '@angular/core';
 export class AppInformationService {
 
   name: string = "NetMonitor";
-  version: string = "0.2.2";
+  version: string = "0.3.0";
 
   constructor() { }
 }

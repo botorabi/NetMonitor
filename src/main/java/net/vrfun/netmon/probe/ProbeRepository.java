@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 by Botorabi. All rights reserved.
+ * Copyright (c) 2018-2020 by Botorabi. All rights reserved.
  * https://github.com/botorabi/NetMonitor
  *
  * License: MIT License (MIT), read the LICENSE text in
@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-//@Transactional
+@Transactional
 public interface ProbeRepository extends CrudRepository<ProbeEntity, Long> {
 
     @Query("select COUNT(*) from ProbeEntity probe where timeStamp >= :from and timeStamp <= :to")

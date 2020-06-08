@@ -1,8 +1,8 @@
 import {Inject, Injectable} from '@angular/core';
-import {Observable} from "rxjs/Observable";
 import {Probe} from "../probe";
 import {HttpClient} from "@angular/common/http";
 import {DOCUMENT} from "@angular/common";
+import {Observable} from "rxjs";
 
 
 @Injectable()
