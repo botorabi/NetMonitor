@@ -1,4 +1,4 @@
-    Copyright (c) 2018 by Botorabi. All rights reserved.
+    Copyright (c) 2018-2020 by Botorabi. All rights reserved.
     https://github.com/botorabi/NetMonitor
 
     License: MIT License (MIT)
@@ -8,7 +8,7 @@
     Author:            Botorabi (botorabi AT gmx DOT net)
 
 
-# Meet4Eat
+# NetMonitor
 
 **NetMonitor** is a web application which allows the collection and viewing the power network frequency over time. The data is collected by a special hardware, for more details contact the project administrator. The collected data is then imported to the web application and can be viewed by a browser.
 
